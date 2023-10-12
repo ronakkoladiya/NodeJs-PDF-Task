@@ -24,34 +24,30 @@ app.get("/generatePDF",async (req, res) => {
 			},
 		});
 
-		console.log(response.data)
-
 		//sending data as props
-		// const crimeData = response.data.data;
-		// const html = await ejs.renderFile('views/report-template.ejs', {crimeData, reportDate: moment(new Date()).format('LL')});
-		//
-		// const browser = await puppeteer.launch();
-		// const page = await browser.newPage();
-		// await page.setContent(html);
-		//
-		// // Generate the PDF
-		// const pdfBuffer = await page.pdf({
-		// 	format: 'A4',
-		// 	printBackground: true, // Include background colors and images
-		// });
-		//
-		// // Close the browser
-		// await browser.close();
-		//
-		// // For saving to a file:
-		// const fs = require('fs');
-		// fs.writeFileSync('output.pdf', pdfBuffer);
-		//
-		// // For sending as a response (e.g., in a web application):
-		// res.contentType('application/pdf');
-		// res.send(pdfBuffer);
+		const crimeData = response.data.data;
+		const html = await ejs.renderFile('views/report-template.ejs', {crimeData, reportDate: moment(new Date()).format('LL')});
 
-		res.send(response.data);
+		const browser = await puppeteer.launch();
+		const page = await browser.newPage();
+		await page.setContent(html);
+
+		// Generate the PDF
+		const pdfBuffer = await page.pdf({
+			format: 'A4',
+			printBackground: true, // Include background colors and images
+		});
+
+		// Close the browser
+		await browser.close();
+
+		// For saving to a file:
+		const fs = require('fs');
+		fs.writeFileSync('output.pdf', pdfBuffer);
+
+		// For sending as a response (e.g., in a web application):
+		res.contentType('application/pdf');
+		res.send(pdfBuffer);
 
 	} catch (error) {
 		console.error('Error:', error);
