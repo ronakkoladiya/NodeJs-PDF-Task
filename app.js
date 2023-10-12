@@ -5,6 +5,10 @@ const puppeteer = require('puppeteer');
 const axios = require('axios');
 const moment = require('moment');
 
+app.get("/",async (req, res) => {
+	res.send('Server Running Successfully');
+});
+
 app.get("/generatePDF",async (req, res) => {
 
 	const apiUrl = 'https://api.usa.gov/crime/fbi/cde/arrest/state/AK/all';
