@@ -54,7 +54,7 @@ app.get("/generatePDF",async (req, res) => {
 
 	} catch (error) {
 		console.error('Error:', error);
-		res.status(500).send('Error fetching data from the API');
+		res.status(500).send({'Error fetching data from the API': error, message : error.message} );
 	}
 
 });
