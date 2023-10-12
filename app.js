@@ -53,9 +53,9 @@ app.get("/generatePDF",async (req, res) => {
 		// Close the browser
 		await browser.close();
 
-		// For saving to a file:
-		const fs = require('fs');
-		fs.writeFileSync('output.pdf', pdfBuffer);
+		// // For saving to a file:
+		// const fs = require('fs');
+		// fs.writeFileSync('output.pdf', pdfBuffer);
 
 		// For sending as a response (e.g., in a web application):
 		res.contentType('application/pdf');
