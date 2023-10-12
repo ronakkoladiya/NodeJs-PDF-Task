@@ -1,8 +1,8 @@
 {
   "builds": [
-    { "src": "Dockerfile", "use": "@vercel/node" }
+    { "src": "app.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "Dockerfile" }
+    { "src": "/(.*)", "dest": "app.js" }
   ]
 }
