@@ -28,7 +28,7 @@ app.get("/generatePDF",async (req, res) => {
 		const crimeData = response.data.data;
 		const html = await ejs.renderFile('views/report-template.ejs', {crimeData, reportDate: moment(new Date()).format('LL')});
 
-		const browser = await puppeteer.launch();
+		const browser = await puppeteer.launch({headless: 'new'});
 		const page = await browser.newPage();
 		await page.setContent(html);
 
