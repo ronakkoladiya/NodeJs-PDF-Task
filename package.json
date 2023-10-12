@@ -14,13 +14,10 @@
     "axios": "^1.5.1",
     "ejs": "^2.6.1",
     "express": "^4.18.2",
-    "html-pdf": "^3.0.1",
-    "mjml": "^4.14.1",
     "moment": "^2.29.4",
     "nodemon": "^3.0.1"
   },
   "devDependencies": {
-    "pdfkit": "^0.13.0",
     "puppeteer": "^21.3.8"
   }
 }
