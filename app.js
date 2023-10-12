@@ -24,6 +24,8 @@ app.get("/generatePDF",async (req, res) => {
 			},
 		});
 
+		console.log(response.data)
+
 		//sending data as props
 		// const crimeData = response.data.data;
 		// const html = await ejs.renderFile('views/report-template.ejs', {crimeData, reportDate: moment(new Date()).format('LL')});
@@ -49,7 +51,7 @@ app.get("/generatePDF",async (req, res) => {
 		// res.contentType('application/pdf');
 		// res.send(pdfBuffer);
 
-		res.send({response});
+		res.send(response.data);
 
 	} catch (error) {
 		console.error('Error:', error);
