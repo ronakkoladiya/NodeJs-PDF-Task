@@ -4,6 +4,7 @@ let ejs = require("ejs");
 const puppeteer = require('puppeteer');
 const axios = require('axios');
 const moment = require('moment');
+require("dotenv").config();
 
 app.get("/",async (req, res) => {
 	res.send('Server Running Successfully');
@@ -29,8 +30,16 @@ app.get("/generatePDF",async (req, res) => {
 		const html = await ejs.renderFile('views/report-template.ejs', {crimeData, reportDate: moment(new Date()).format('LL')});
 
 		const browser = await puppeteer.launch({
-			headless: 'new',
-			executablePath: '/path/to/chromium-binary'
+			args: [
+				"--disable-setuid-sandbox",
+				"--no-sandbox",
+				"--single-process",
+				"--no-zygote",
+			],
+			executablePath:
+				process.env.NODE_ENV === "production"
+					? process.env.PUPPETEER_EXECUTABLE_PATH
+					: puppeteer.executablePath(),
 		});
 		const page = await browser.newPage();
 		await page.setContent(html);
@@ -54,7 +63,7 @@ app.get("/generatePDF",async (req, res) => {
 
 	} catch (error) {
 		console.error('Error:', error);
-		res.status(500).send({'Error fetching data from the API': error, message : error.message} );
+		res.status(500).send({'Error fetching data from the API': error, message : error.message});
 	}
 
 });
